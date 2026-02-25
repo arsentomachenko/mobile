@@ -40,6 +40,8 @@ const HeroSection: React.FC = () => {
     document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const bookingUrl = import.meta.env.VITE_CAL_BOOKING_URL;
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated SVG Background Elements */}
@@ -132,17 +134,17 @@ const HeroSection: React.FC = () => {
           {/* Tech stack icons */}
           <div className="flex items-center justify-center gap-6 py-4 animate-slide-up" style={{ animationDelay: '0.5s' }}>
             {[
-              { name: 'Flutter', color: '#02569B' },
-              { name: 'React Native', color: '#61DAFB' },
-              { name: 'Swift', color: '#F05138' },
-              { name: 'Kotlin', color: '#7F52FF' },
-              { name: 'Ionic', color: '#3880FF' },
+              { name: 'Flutter', src: '/Flutter.svg' },
+              { name: 'React Native', src: '/React.svg' },
+              { name: 'Swift', src: '/Swift.svg' },
+              { name: 'Kotlin', src: '/Kotlin.svg' },
+              { name: 'Ionic', src: '/Ionic.svg' },
             ].map((tech) => (
               <div
                 key={tech.name}
                 className="group relative flex items-center justify-center w-12 h-12 rounded-xl bg-white/5 border border-white/10 hover:border-[#00FF87]/50 transition-all duration-300 hover:scale-110 hover:bg-[#00FF87]/5"
               >
-                <div className="w-6 h-6 rounded-full" style={{ backgroundColor: tech.color, opacity: 0.8 }} />
+                <img src={tech.src} alt={`${tech.name} logo`} className="w-6 h-6" loading="lazy" />
                 <span className="absolute -bottom-8 text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                   {tech.name}
                 </span>
@@ -166,11 +168,17 @@ const HeroSection: React.FC = () => {
             </button>
 
             <button
-              onClick={() => scrollTo('#contact')}
+              onClick={() => {
+                if (bookingUrl) {
+                  window.open(bookingUrl, '_blank', 'noopener,noreferrer');
+                  return;
+                }
+                scrollTo('#contact');
+              }}
               className="group px-8 py-4 border border-[#00FF87]/30 text-[#00FF87] font-semibold rounded-full hover:bg-[#00FF87]/10 transition-all duration-300 hover:border-[#00FF87]/60 hover:scale-105"
             >
               <span className="flex items-center gap-2">
-                Get In Touch
+                Set Schedule
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-y-[-2px]">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                   <polyline points="22,6 12,13 2,6" />
@@ -182,8 +190,8 @@ const HeroSection: React.FC = () => {
           {/* Stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto pt-12 animate-slide-up" style={{ animationDelay: '0.9s' }}>
             {[
-              { value: '6+', label: 'Years Experience' },
-              { value: '15+', label: 'Apps Shipped' },
+              { value: '11+', label: 'Years Experience' },
+              { value: '20+', label: 'Apps Shipped' },
               { value: '5', label: 'Frameworks' },
               { value: '50+', label: 'Happy Clients' },
             ].map((stat) => (

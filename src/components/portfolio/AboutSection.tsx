@@ -5,7 +5,7 @@ const AboutSection: React.FC = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   const journey = [
-    { year: '2018', title: 'Started Mobile Development', desc: 'Began with native Android (Java) and iOS (Objective-C/Swift)' },
+    { year: '2015', title: 'Started Mobile Development', desc: 'Began with native Android (Java) and iOS (Objective-C/Swift)' },
     { year: '2019', title: 'Cross-Platform Pioneer', desc: 'Adopted Flutter and React Native for multi-platform delivery' },
     { year: '2020', title: 'Enterprise Solutions', desc: 'Built healthcare and marketplace apps serving thousands of users' },
     { year: '2021', title: 'Architecture Focus', desc: 'Deep dive into clean architecture, TDD, and CI/CD pipelines' },
@@ -84,16 +84,16 @@ const AboutSection: React.FC = () => {
           <div className={`transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             <div className="relative">
               {/* Photo */}
-              <div className="relative w-64 h-64 mx-auto lg:mx-0 mb-8">
+              <div className="relative w-64 h-64 mx-auto mb-8">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#00FF87] to-[#00D9A3] animate-morph opacity-20 blur-xl" />
                 <img
                   src="https://d64gsuwffb70l.cloudfront.net/699f57cd70001204b5f3365d_1772050738814_4da26ed6.jpg"
                   alt="Developer portrait"
-                  className="relative w-full h-full object-cover rounded-2xl border-2 border-[#00FF87]/20"
+                  className="relative w-full h-full object-cover object-center rounded-2xl border-2 border-[#00FF87]/20"
                 />
                 {/* Floating badge */}
                 <div className="absolute -bottom-3 -right-3 px-4 py-2 bg-[#0a0a0a] border border-[#00FF87]/30 rounded-xl shadow-lg">
-                  <span className="text-[#00FF87] font-semibold text-sm">6+ Years</span>
+                  <span className="text-[#00FF87] font-semibold text-sm">11+ Years</span>
                 </div>
               </div>
 

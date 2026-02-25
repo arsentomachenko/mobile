@@ -22,7 +22,7 @@ const stats: StatItem[] = [
   },
   {
     label: 'App Store Downloads',
-    value: 500,
+    value: 200,
     suffix: 'K+',
     icon: (
       <svg viewBox="0 0 32 32" className="w-8 h-8">
@@ -33,7 +33,7 @@ const stats: StatItem[] = [
   },
   {
     label: 'Lines of Code',
-    value: 200,
+    value: 150,
     suffix: 'K+',
     icon: (
       <svg viewBox="0 0 32 32" className="w-8 h-8">

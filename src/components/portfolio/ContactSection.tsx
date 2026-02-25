@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const ContactSection: React.FC = () => {
@@ -7,6 +8,11 @@ const ContactSection: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
   const validate = () => {
     const errs: Record<string, string> = {};
@@ -20,12 +26,41 @@ const ContactSection: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError('');
     if (!validate()) return;
+    if (!serviceId || !templateId || !publicKey) {
+      setSubmitError('Email service is not configured. Please check your environment variables.');
+      return;
+    }
     setIsSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    setIsSubmitting(false);
-    setSubmitted(true);
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    try {
+      const fullMessage = [
+        `Name: ${formData.name}`,
+        `Email: ${formData.email}`,
+        `Project Type: ${formData.subject || 'General Inquiry'}`,
+        'Message:',
+        formData.message,
+      ].join('\n');
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: formData.name,
+          email: formData.email,
+          project_type: formData.subject || 'General Inquiry',
+          message: fullMessage,
+          reply_to: formData.email,
+        },
+        publicKey
+      );
+      setSubmitted(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (err) {
+      setSubmitError('Failed to send your message. Please try again in a moment.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -66,7 +101,7 @@ const ContactSection: React.FC = () => {
             {[
               {
                 title: 'Email',
-                value: 'hello@mobiledev.io',
+                value: 'jamescampbell0195@gmail.com',
                 icon: (
                   <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -148,6 +183,11 @@ const ContactSection: React.FC = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5 p-8 rounded-2xl border border-white/10 bg-white/[0.02]">
+                {submitError && (
+                  <div className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+                    {submitError}
+                  </div>
+                )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-sm text-gray-400 mb-2">Name *</label>
