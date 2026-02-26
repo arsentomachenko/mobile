@@ -20,10 +20,7 @@ const skills: Skill[] = [
     projects: 6,
     description: 'Dart, BLoC, Provider, Riverpod, Custom Widgets, Platform Channels',
     icon: (
-      <svg viewBox="0 0 32 32" className="w-8 h-8">
-        <path d="M16 2L6 12l4 4L26 0H16zM6 12l10 10 4-4-10-10z" fill="currentColor" />
-        <path d="M16 22l-4-4-6 6h10l6-6-4-4z" fill="currentColor" opacity="0.7" />
-      </svg>
+      <img src="/Flutter.svg" alt="Flutter" className="w-8 h-8" />
     ),
   },
   {
@@ -34,12 +31,7 @@ const skills: Skill[] = [
     projects: 4,
     description: 'Redux, Navigation, Native Modules, Reanimated, Expo',
     icon: (
-      <svg viewBox="0 0 32 32" className="w-8 h-8">
-        <circle cx="16" cy="16" r="3" fill="currentColor" />
-        <ellipse cx="16" cy="16" rx="14" ry="5" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        <ellipse cx="16" cy="16" rx="14" ry="5" fill="none" stroke="currentColor" strokeWidth="1.5" transform="rotate(60 16 16)" />
-        <ellipse cx="16" cy="16" rx="14" ry="5" fill="none" stroke="currentColor" strokeWidth="1.5" transform="rotate(120 16 16)" />
-      </svg>
+      <img src="/React.svg" alt="React Native" className="w-8 h-8" />
     ),
   },
   {
@@ -50,9 +42,7 @@ const skills: Skill[] = [
     projects: 3,
     description: 'UIKit, SwiftUI, Core Data, Combine, ARKit, WidgetKit',
     icon: (
-      <svg viewBox="0 0 32 32" className="w-8 h-8">
-        <path d="M24 4C20 8 12 16 8 18c4-1 8-1 12 0-2 2-6 6-12 8 8-1 14-4 18-10 0 0 2-4 0-8-1-2-2-4-2-4z" fill="currentColor" />
-      </svg>
+      <img src="/Swift.svg" alt="Swift" className="w-8 h-8" />
     ),
   },
   {
@@ -63,11 +53,7 @@ const skills: Skill[] = [
     projects: 4,
     description: 'Jetpack Compose, Room, Coroutines, Hilt, Material You',
     icon: (
-      <svg viewBox="0 0 32 32" className="w-8 h-8">
-        <path d="M4 28L16 16 28 28H4z" fill="currentColor" opacity="0.7" />
-        <path d="M4 4h12L4 16V4z" fill="currentColor" />
-        <path d="M16 4l12 12V4H16z" fill="currentColor" opacity="0.85" />
-      </svg>
+      <img src="/Kotlin.svg" alt="Kotlin" className="w-8 h-8" />
     ),
   },
   {
@@ -78,11 +64,7 @@ const skills: Skill[] = [
     projects: 3,
     description: 'Capacitor, Angular/React, Web Components, PWA',
     icon: (
-      <svg viewBox="0 0 32 32" className="w-8 h-8">
-        <circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" strokeWidth="2" />
-        <circle cx="16" cy="16" r="5" fill="currentColor" />
-        <circle cx="24" cy="8" r="3" fill="currentColor" />
-      </svg>
+      <img src="/Ionic.svg" alt="Ionic" className="w-8 h-8" />
     ),
   },
   {
@@ -93,10 +75,7 @@ const skills: Skill[] = [
     projects: 5,
     description: 'Android SDK, Legacy Apps, Enterprise Solutions',
     icon: (
-      <svg viewBox="0 0 32 32" className="w-8 h-8">
-        <path d="M12 4s-1 4 3 6c4 2 3 5 3 5s4-2 2-5c-2-3-5-4-5-4s6 8 2 10c-4 2-8-2-5-12z" fill="currentColor" />
-        <path d="M10 22s-1 1 2 1c3 0 6 1 6 1s-2 1-5 1c-3 0-4-1-3-3z" fill="currentColor" opacity="0.7" />
-      </svg>
+      <img src="/Java.svg" alt="Java" className="w-8 h-8" />
     ),
   },
   {
@@ -107,10 +86,7 @@ const skills: Skill[] = [
     projects: 10,
     description: 'Auth, Firestore, Cloud Functions, Analytics, Crashlytics',
     icon: (
-      <svg viewBox="0 0 32 32" className="w-8 h-8">
-        <path d="M8 26l2-18 4 8-6 10z" fill="currentColor" opacity="0.7" />
-        <path d="M8 26L20 6l-4 12 8-4-16 12z" fill="currentColor" />
-      </svg>
+      <img src="/Firebase.svg" alt="Firebase" className="w-8 h-8" />
     ),
   },
   {

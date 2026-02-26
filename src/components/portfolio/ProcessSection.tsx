@@ -67,14 +67,14 @@ const ProcessSection: React.FC = () => {
 
   return (
     <section className="relative py-24 lg:py-32">
-      {/* Animated SVG line connecting steps */}
-      <svg className="absolute left-1/2 top-0 h-full w-1 opacity-10 hidden lg:block" viewBox="0 0 2 1000" preserveAspectRatio="none">
+      {/* Animated SVG line connecting steps (mobile only) */}
+      <svg className="absolute left-1/2 top-0 h-full w-1 opacity-10 block lg:hidden" viewBox="0 0 2 1000" preserveAspectRatio="none">
         <line x1="1" y1="0" x2="1" y2="1000" stroke="#00FF87" strokeWidth="2" strokeDasharray="8 8">
           <animate attributeName="stroke-dashoffset" from="16" to="0" dur="1s" repeatCount="indefinite" />
         </line>
       </svg>
 
-      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pl-12 lg:pr-4">
         {/* Header */}
         <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#00FF87]/20 bg-[#00FF87]/5 text-[#00FF87] text-sm mb-4">
@@ -99,25 +99,27 @@ const ProcessSection: React.FC = () => {
               className={`relative group transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
               style={{ transitionDelay: `${i * 150}ms` }}
             >
-              {/* Connector line (desktop) */}
-              {i < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-12 left-[calc(50%+30px)] right-[-50%] h-px">
-                  <svg className="w-full h-2" viewBox="0 0 200 2" preserveAspectRatio="none">
-                    <line x1="0" y1="1" x2="200" y2="1" stroke="#00FF87" strokeWidth="1" strokeDasharray="6 4" opacity="0.3">
-                      <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
-                    </line>
-                  </svg>
-                </div>
-              )}
-
               <div className="text-center">
-                {/* Number circle */}
-                <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#00FF87]/5 border border-[#00FF87]/20 mb-4 group-hover:bg-[#00FF87]/10 group-hover:border-[#00FF87]/40 group-hover:shadow-[0_0_20px_rgba(0,255,135,0.15)] transition-all duration-500">
-                  <span className="text-[#00FF87] font-bold text-lg">{step.number}</span>
-                  {/* Animated ring */}
-                  <svg className="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" viewBox="0 0 64 64">
-                    <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="#00FF87" strokeWidth="1" strokeDasharray="240" strokeDashoffset="240" className="group-hover:animate-draw-line" />
-                  </svg>
+                <div className="relative flex justify-center mb-4 h-16">
+                  {/* Connector line (desktop) */}
+                  {i < steps.length - 1 && (
+                    <div className="hidden lg:block absolute top-1/2 left-[calc(50%+32px)] right-[calc(-50%+8px)] -translate-y-1/2 h-px">
+                      <svg className="w-full h-2" viewBox="0 0 200 2" preserveAspectRatio="none">
+                        <line x1="0" y1="1" x2="200" y2="1" stroke="#00FF87" strokeWidth="1" strokeDasharray="6 4" opacity="0.3">
+                          <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
+                        </line>
+                      </svg>
+                    </div>
+                  )}
+
+                  {/* Number circle */}
+                  <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#00FF87]/5 border border-[#00FF87]/20 group-hover:bg-[#00FF87]/10 group-hover:border-[#00FF87]/40 group-hover:shadow-[0_0_20px_rgba(0,255,135,0.15)] transition-all duration-500">
+                    <span className="text-[#00FF87] font-bold text-lg">{step.number}</span>
+                    {/* Animated ring */}
+                    <svg className="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" viewBox="0 0 64 64">
+                      <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="#00FF87" strokeWidth="1" strokeDasharray="240" strokeDashoffset="240" className="group-hover:animate-draw-line" />
+                    </svg>
+                  </div>
                 </div>
 
                 {/* Icon */}
