@@ -277,13 +277,13 @@ const BlogPostPage: React.FC = () => {
 
       <main className="relative z-10 pt-20">
         {/* Hero */}
-        <div className={`relative h-[40vh] min-h-[320px] overflow-hidden transition-all duration-1000 ${animateIn ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`relative h-[35vh] min-h-[260px] sm:h-[40vh] sm:min-h-[320px] overflow-hidden transition-all duration-1000 ${animateIn ? 'opacity-100' : 'opacity-0'}`}>
           <img src={post.coverImage} alt={post.title} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/40 to-transparent" />
 
-          <div className="absolute bottom-0 left-0 right-0 p-8 max-w-4xl mx-auto">
-            <div className="flex items-center gap-3 mb-4">
+          <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 max-w-4xl mx-auto">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
               <Link to="/blog" className="flex items-center gap-1 text-gray-400 hover:text-[#00FF87] text-sm transition-colors">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
                 Blog
@@ -291,7 +291,7 @@ const BlogPostPage: React.FC = () => {
               <span className="text-gray-600">/</span>
               <span className="px-3 py-1 rounded-full bg-[#00FF87]/10 text-[#00FF87] text-xs font-medium">{post.category}</span>
             </div>
-            <h1 className={`text-3xl lg:text-5xl font-bold text-white leading-tight transition-all duration-1000 delay-200 ${animateIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+            <h1 className={`text-2xl sm:text-3xl lg:text-5xl font-bold text-white leading-tight transition-all duration-1000 delay-200 ${animateIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               {post.title}
             </h1>
           </div>
@@ -299,7 +299,7 @@ const BlogPostPage: React.FC = () => {
 
         {/* Meta bar */}
         <div className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 transition-all duration-1000 delay-300 ${animateIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-          <div className="flex flex-wrap items-center gap-4 pb-6 border-b border-white/10">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4 pb-6 border-b border-white/10">
             <div className="flex items-center gap-3">
               <img src={post.author.avatar} alt={post.author.name} className="w-10 h-10 rounded-full border border-[#00FF87]/20 object-cover" />
               <div>
@@ -317,7 +317,7 @@ const BlogPostPage: React.FC = () => {
                 {post.readTime}
               </span>
             </div>
-            <div className="flex flex-wrap gap-1.5 ml-auto">
+            <div className="flex flex-wrap gap-1.5 sm:ml-auto">
               {post.tags.map(tag => (
                 <span key={tag} className="px-2 py-0.5 rounded-md bg-white/5 text-gray-500 text-xs border border-white/5">{tag}</span>
               ))}
@@ -327,7 +327,7 @@ const BlogPostPage: React.FC = () => {
 
         {/* Content + TOC */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-          <div className="flex gap-12">
+          <div className="flex flex-col xl:flex-row gap-12">
             {/* TOC Sidebar */}
             <aside className="hidden xl:block w-64 flex-shrink-0">
               <TableOfContents items={post.tableOfContents} activeId={activeHeading} />
@@ -381,7 +381,7 @@ const BlogPostPage: React.FC = () => {
               </div>
 
               {/* Author card */}
-              <div className="mt-12 p-6 rounded-2xl border border-white/10 bg-white/[0.02] flex items-start gap-4">
+              <div className="mt-12 p-6 rounded-2xl border border-white/10 bg-white/[0.02] flex flex-col sm:flex-row items-start gap-4">
                 <img src={post.author.avatar} alt={post.author.name} className="w-16 h-16 rounded-xl border border-[#00FF87]/20 object-cover flex-shrink-0" />
                 <div>
                   <h4 className="text-white font-semibold">{post.author.name}</h4>

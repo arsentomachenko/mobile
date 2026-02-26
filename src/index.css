@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -45,6 +45,20 @@
     --sidebar-accent-foreground: 215 25% 27%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 221 83% 53%;
+
+    --studio-bg: #0b0d12;
+    --studio-panel: #121521;
+    --studio-panel-soft: rgba(18, 21, 33, 0.82);
+    --studio-panel-subtle: rgba(18, 21, 33, 0.7);
+    --studio-card: #151a28;
+    --studio-card-soft: rgba(21, 26, 40, 0.82);
+    --studio-card-strong: rgba(21, 26, 40, 0.92);
+    --studio-ink: #f2f1ec;
+    --studio-muted: #a4adbd;
+    --studio-accent: #22e3a5;
+    --studio-warm: #f3b664;
+    --studio-border: rgba(255, 255, 255, 0.08);
+    --studio-glow: rgba(34, 227, 165, 0.18);
   }
 
   .dark {
@@ -117,11 +131,25 @@ html {
 /* Custom animations */
 @keyframes marquee {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-33.33%); }
+  100% { transform: translateX(-50%); }
 }
 
 .animate-marquee {
   animation: marquee 30s linear infinite;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  width: max-content;
+  will-change: transform;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
 }
 
 

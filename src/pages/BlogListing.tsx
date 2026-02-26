@@ -60,10 +60,10 @@ const BlogListing: React.FC = () => {
               </svg>
               Blog & Insights
             </div>
-            <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mb-4">
               Mobile Dev <span className="bg-gradient-to-r from-[#00FF87] to-[#00D9A3] bg-clip-text text-transparent">Journal</span>
             </h1>
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+            <p className="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg">
               Deep dives into architecture, performance, and the craft of building exceptional mobile experiences.
             </p>
           </div>
@@ -82,8 +82,8 @@ const BlogListing: React.FC = () => {
                   Featured
                 </div>
               </div>
-              <div className="p-8 flex flex-col justify-center">
-                <div className="flex items-center gap-3 mb-4">
+              <div className="p-6 sm:p-8 flex flex-col justify-center">
+                <div className="flex flex-wrap items-center gap-2 mb-4">
                   <span className="px-3 py-1 rounded-full bg-[#00FF87]/10 text-[#00FF87] text-xs font-medium">{featuredPost.category}</span>
                   <span className="text-gray-500 text-xs">{featuredPost.date}</span>
                   <span className="text-gray-500 text-xs flex items-center gap-1">
@@ -91,10 +91,10 @@ const BlogListing: React.FC = () => {
                     {featuredPost.readTime}
                   </span>
                 </div>
-                <h2 className="text-2xl lg:text-3xl font-bold text-white mb-3 group-hover:text-[#00FF87] transition-colors duration-300">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 group-hover:text-[#00FF87] transition-colors duration-300">
                   {featuredPost.title}
                 </h2>
-                <p className="text-gray-400 leading-relaxed mb-4">{featuredPost.excerpt}</p>
+                <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-4">{featuredPost.excerpt}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {featuredPost.tags.slice(0, 4).map(tag => (
                     <span key={tag} className="px-2 py-0.5 rounded-md bg-white/5 text-gray-400 text-xs border border-white/5">{tag}</span>
@@ -171,7 +171,7 @@ const BlogListing: React.FC = () => {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex flex-wrap items-center justify-center gap-2">
               <button
                 onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
@@ -228,14 +228,14 @@ const PostCard: React.FC<{ post: BlogPost; index: number }> = ({ post, index }) 
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
       }`}
     >
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-44 sm:h-48 overflow-hidden">
         <img src={post.coverImage} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
         <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[#00FF87]/10 border border-[#00FF87]/20 text-[#00FF87] text-xs font-medium backdrop-blur-sm">
           {post.category}
         </div>
       </div>
-      <div className="p-6">
+      <div className="p-5 sm:p-6">
         <div className="flex items-center gap-3 mb-3">
           <span className="text-gray-500 text-xs">{post.date}</span>
           <span className="text-gray-600">·</span>

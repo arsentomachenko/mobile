@@ -18,7 +18,7 @@ import Footer from './portfolio/Footer';
 
 const AppLayout: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[var(--studio-bg)] text-white overflow-x-hidden">
       <AnimatedBackground />
       <Navbar />
       
