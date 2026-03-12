@@ -251,44 +251,6 @@ const TrifectaSection: React.FC = () => {
                 ))}
               </div>
             </div>
-
-            {/* SVG Architecture Diagram */}
-            <div className="p-6 rounded-2xl border border-white/10 bg-white/[0.02]">
-              <h3 className="text-sm font-semibold text-[#00FF87] uppercase tracking-wider mb-4">Architecture Flow</h3>
-              <svg viewBox="0 0 400 120" className="w-full h-auto">
-                {/* Boxes */}
-                <rect x="10" y="40" width="70" height="40" rx="8" fill="none" stroke="#00FF87" strokeWidth="1.5" opacity="0.8" />
-                <text x="45" y="64" textAnchor="middle" fill="#00FF87" fontSize="10" fontFamily="monospace">UI Layer</text>
-
-                <rect x="120" y="40" width="70" height="40" rx="8" fill="none" stroke="#00D9A3" strokeWidth="1.5" opacity="0.8" />
-                <text x="155" y="64" textAnchor="middle" fill="#00D9A3" fontSize="10" fontFamily="monospace">Logic</text>
-
-                <rect x="230" y="40" width="70" height="40" rx="8" fill="none" stroke="#4ade80" strokeWidth="1.5" opacity="0.8" />
-                <text x="265" y="64" textAnchor="middle" fill="#4ade80" fontSize="10" fontFamily="monospace">Data</text>
-
-                <rect x="330" y="20" width="60" height="30" rx="6" fill="none" stroke="#22c55e" strokeWidth="1" opacity="0.6" />
-                <text x="360" y="39" textAnchor="middle" fill="#22c55e" fontSize="8" fontFamily="monospace">Remote</text>
-
-                <rect x="330" y="70" width="60" height="30" rx="6" fill="none" stroke="#22c55e" strokeWidth="1" opacity="0.6" />
-                <text x="360" y="89" textAnchor="middle" fill="#22c55e" fontSize="8" fontFamily="monospace">Local</text>
-
-                {/* Arrows */}
-                <line x1="80" y1="60" x2="120" y2="60" stroke="#00FF87" strokeWidth="1" markerEnd="url(#arrowhead)" opacity="0.5">
-                  <animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite" />
-                </line>
-                <line x1="190" y1="60" x2="230" y2="60" stroke="#00D9A3" strokeWidth="1" markerEnd="url(#arrowhead)" opacity="0.5">
-                  <animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite" />
-                </line>
-                <line x1="300" y1="50" x2="330" y2="35" stroke="#4ade80" strokeWidth="1" opacity="0.5" />
-                <line x1="300" y1="70" x2="330" y2="85" stroke="#4ade80" strokeWidth="1" opacity="0.5" />
-
-                <defs>
-                  <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-                    <polygon points="0 0, 10 3.5, 0 7" fill="#00FF87" opacity="0.5" />
-                  </marker>
-                </defs>
-              </svg>
-            </div>
           </div>
         </div>
       </div>

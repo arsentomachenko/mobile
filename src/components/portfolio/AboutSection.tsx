@@ -87,7 +87,7 @@ const AboutSection: React.FC = () => {
               <div className="relative w-64 h-64 mx-auto mb-8">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#00FF87] to-[#00D9A3] animate-morph opacity-20 blur-xl" />
                 <img
-                  src="https://d64gsuwffb70l.cloudfront.net/699f57cd70001204b5f3365d_1772050738814_4da26ed6.jpg"
+                  src="https://d64gsuwffb70l.cloudfront.net/69b17eb58df55adb23cbd9ba_1773241367926_8a376b64.jpeg"
                   alt="Developer portrait"
                   className="relative w-full h-full object-cover object-center rounded-2xl border-2 border-[#00FF87]/20"
                 />

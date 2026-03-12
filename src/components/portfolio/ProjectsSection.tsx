@@ -1,5 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from '@/components/ui/carousel';
+import { cn } from '@/lib/utils';
 
 interface Project {
   id: number;
@@ -201,10 +210,19 @@ const ProjectsSection: React.FC = () => {
   const [activePlatform, setActivePlatform] = useState('All');
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
   const { ref, isVisible } = useScrollAnimation();
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
-  const filtered = activePlatform === 'All'
-    ? projects
-    : projects.filter((p) => p.platforms.includes(activePlatform));
+  const filtered = useMemo(() => {
+    return activePlatform === 'All'
+      ? projects
+      : projects.filter((p) => p.platforms.includes(activePlatform));
+  }, [activePlatform]);
+
+  useEffect(() => {
+    // When filtering, reset carousel position + close any expanded details.
+    setExpandedProject(null);
+    carouselApi?.scrollTo(0);
+  }, [activePlatform, carouselApi]);
 
   return (
     <section id="projects" className="relative bg-[var(--studio-bg)] py-24 lg:py-32">
@@ -243,56 +261,67 @@ const ProjectsSection: React.FC = () => {
           ))}
         </div>
 
-        <div className="relative">
-          <div className="absolute left-4 top-0 h-full w-px bg-[var(--studio-border)] lg:left-1/2 lg:-translate-x-1/2" />
-
-          <div className="space-y-12">
-            {filtered.map((project, i) => {
-              const isLeft = i % 2 === 0;
-              return (
-                <article
+        {/* Carousel */}
+        <div
+          className={cn(
+            'transition-all duration-1000 delay-300',
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          )}
+        >
+          <Carousel
+            setApi={setCarouselApi}
+            opts={{ align: 'start', dragFree: true }}
+            className="relative"
+          >
+            <CarouselContent className="py-2">
+              {filtered.map((project, i) => (
+                <CarouselItem
                   key={project.id}
-                  className={`relative flex flex-col gap-6 pl-10 transition-all duration-500 lg:pl-0 lg:flex-row ${isLeft ? '' : 'lg:flex-row-reverse'} ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                  }`}
+                  className={cn(
+                    // responsive slide width
+                    'basis-[88%] sm:basis-[72%] md:basis-1/2 xl:basis-1/3',
+                    // staggered fade + slide-up when section enters
+                    'transition-all duration-700 ease-out',
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  )}
                   style={{ transitionDelay: `${i * 120}ms` }}
                 >
-                  <div className="absolute left-4 top-8 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-[var(--studio-border)] bg-[var(--studio-panel-soft)] text-[10px] font-mono text-[var(--studio-accent)] lg:left-1/2 lg:-translate-x-1/2">
-                    {String(i + 1).padStart(2, '0')}
-                  </div>
-
-                  <div className="lg:w-1/2">
-                    <div className="rounded-[28px] border border-[var(--studio-border)] bg-[#0c1018]/70 p-6">
-                      <div className="flex items-center justify-between text-xs font-mono uppercase tracking-[0.2em] text-[var(--studio-muted)]">
-                        <span>{project.category}</span>
+                  <article className="group h-full">
+                    <div className="h-full rounded-[28px] border border-[var(--studio-border)] bg-[var(--studio-card-soft)] p-6 shadow-sm transition-colors duration-300 group-hover:border-[var(--studio-accent)]/40">
+                      <div className="flex items-center justify-between gap-3 text-xs font-mono uppercase tracking-[0.2em] text-[var(--studio-muted)]">
+                        <span className="truncate">{project.category}</span>
                         <div className="flex items-center gap-2">
                           {project.platforms.map((p) => (
-                            <span key={p} className="rounded-full border border-[var(--studio-border)] px-2 py-0.5 text-[10px] text-[var(--studio-muted)]">
+                            <span
+                              key={p}
+                              className="rounded-full border border-[var(--studio-border)] px-2 py-0.5 text-[10px] text-[var(--studio-muted)]"
+                            >
                               {p}
                             </span>
                           ))}
                         </div>
                       </div>
+
                       <div className="mt-4 flex items-center justify-center overflow-hidden rounded-2xl border border-[var(--studio-border)] bg-[#0b0f18]/80">
                         <img
                           src={project.image}
                           alt={project.title}
-                          className="h-72 w-auto max-w-[240px] object-contain p-4"
+                          loading="lazy"
+                          className="h-72 w-auto max-w-[240px] object-contain p-4 transition-transform duration-500 group-hover:scale-[1.02]"
                         />
                       </div>
-                    </div>
-                  </div>
 
-                  <div className="lg:w-1/2">
-                    <div className="flex h-full flex-col justify-between gap-4 rounded-[28px] border border-[var(--studio-border)] bg-[var(--studio-card-soft)] p-6">
-                      <div className="space-y-3">
+                      <div className="mt-5 space-y-3">
                         <h3 className="text-2xl font-semibold text-[var(--studio-ink)]">{project.title}</h3>
                         <p className="text-sm text-[var(--studio-muted)]">{project.description}</p>
 
                         {project.metrics && project.metrics.length > 0 && (
-                          <div className="flex flex-wrap gap-2 pt-2">
+                          <div className="flex flex-wrap gap-2 pt-1">
                             {project.metrics.map((m) => (
-                              <span key={m} className="rounded-full border border-[var(--studio-border)] bg-[var(--studio-panel-subtle)] px-3 py-1 text-[10px] font-mono text-[var(--studio-accent)]">
+                              <span
+                                key={m}
+                                className="rounded-full border border-[var(--studio-border)] bg-[var(--studio-panel-subtle)] px-3 py-1 text-[10px] font-mono text-[var(--studio-accent)]"
+                              >
                                 {m}
                               </span>
                             ))}
@@ -300,7 +329,7 @@ const ProjectsSection: React.FC = () => {
                         )}
                       </div>
 
-                      <div className="flex flex-wrap gap-2">
+                      <div className="mt-5 flex flex-wrap gap-2">
                         {project.tech.map((t) => (
                           <span key={t} className="rounded-full border border-[var(--studio-border)] px-3 py-1 text-xs text-[var(--studio-muted)]">
                             {t}
@@ -310,7 +339,7 @@ const ProjectsSection: React.FC = () => {
 
                       <button
                         onClick={() => setExpandedProject(expandedProject === project.id ? null : project.id)}
-                        className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[var(--studio-accent)]"
+                        className="mt-5 flex w-full items-center justify-center gap-2 rounded-full border border-[var(--studio-border)] bg-[var(--studio-panel-soft)]/40 px-4 py-2 text-xs font-mono uppercase tracking-[0.2em] text-[var(--studio-accent)] transition-colors duration-300 hover:border-[var(--studio-accent)]/40 hover:bg-[var(--studio-panel-soft)]/70"
                       >
                         <svg
                           width="14"
@@ -326,8 +355,13 @@ const ProjectsSection: React.FC = () => {
                         {expandedProject === project.id ? 'Hide details' : 'Show build details'}
                       </button>
 
-                      <div className={`overflow-hidden transition-all duration-500 ${expandedProject === project.id ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
-                        <div className="grid grid-cols-2 gap-2 pt-3">
+                      <div
+                        className={cn(
+                          'overflow-hidden transition-all duration-500',
+                          expandedProject === project.id ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                        )}
+                      >
+                        <div className="grid grid-cols-2 gap-2 pt-4">
                           {project.highlights.map((h) => (
                             <div key={h} className="flex items-center gap-2 text-xs text-[var(--studio-muted)]">
                               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--studio-accent)" strokeWidth="2">
@@ -339,7 +373,7 @@ const ProjectsSection: React.FC = () => {
                         </div>
                       </div>
 
-                      <div className="flex flex-wrap gap-2 border-t border-[var(--studio-border)] pt-4">
+                      <div className="mt-5 flex flex-wrap gap-2 border-t border-[var(--studio-border)] pt-4">
                         {project.links.map((link) => (
                           <a
                             key={link.url}
@@ -354,11 +388,14 @@ const ProjectsSection: React.FC = () => {
                         ))}
                       </div>
                     </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+                  </article>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+
+            <CarouselPrevious className="left-2 z-10 border-[var(--studio-border)] bg-[var(--studio-panel-soft)]/70 text-[var(--studio-muted)] hover:text-[var(--studio-accent)]" />
+            <CarouselNext className="right-2 z-10 border-[var(--studio-border)] bg-[var(--studio-panel-soft)]/70 text-[var(--studio-muted)] hover:text-[var(--studio-accent)]" />
+          </Carousel>
         </div>
       </div>
     </section>

@@ -101,8 +101,29 @@ const StatsSection: React.FC = () => {
               className={`text-center group transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
               style={{ transitionDelay: `${i * 150}ms` }}
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#00FF87]/5 border border-[#00FF87]/10 text-[#00FF87] mb-4 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,255,135,0.15)] transition-all duration-300">
+              <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#00FF87]/5 border border-[#00FF87]/10 text-[#00FF87] mb-4 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,255,135,0.15)] transition-all duration-300">
                 {stat.icon}
+
+                {/* Hover draw-line ring (only on the first stat) */}
+                
+                <svg
+                  className="pointer-events-none absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  viewBox="0 0 64 64"
+                >
+                  <rect
+                    x="2"
+                    y="2"
+                    width="60"
+                    height="60"
+                    rx="14"
+                    fill="none"
+                    stroke="#00FF87"
+                    strokeWidth="1"
+                    strokeDasharray="240"
+                    strokeDashoffset="240"
+                    className="group-hover:animate-draw-line"
+                  />
+                </svg>
               </div>
               <div className="mb-2">
                 <AnimatedCounter target={stat.value} suffix={stat.suffix} isVisible={isVisible} />
