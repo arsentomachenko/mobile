@@ -225,7 +225,7 @@ const ProjectsSection: React.FC = () => {
   }, [activePlatform, carouselApi]);
 
   return (
-    <section id="projects" className="relative bg-[var(--studio-bg)] py-24 lg:py-32">
+    <section id="projects" className="relative overflow-hidden bg-[var(--studio-bg)] py-24 lg:py-32">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute right-10 top-12 h-64 w-64 rounded-full bg-[radial-gradient(circle,_rgba(34,227,165,0.18),_transparent_60%)]" />
         <div className="absolute left-[-120px] bottom-[-120px] h-72 w-72 rounded-full bg-[radial-gradient(circle,_rgba(243,182,100,0.16),_transparent_60%)]" />
@@ -273,13 +273,13 @@ const ProjectsSection: React.FC = () => {
             opts={{ align: 'start', dragFree: true }}
             className="relative"
           >
-            <CarouselContent className="py-2">
+            <CarouselContent className="py-2 -ml-2 md:-ml-4">
               {filtered.map((project, i) => (
                 <CarouselItem
                   key={project.id}
                   className={cn(
                     // responsive slide width
-                    'basis-[88%] sm:basis-[72%] md:basis-1/2 xl:basis-1/3',
+                    'pl-2 md:pl-4 basis-[92%] sm:basis-[78%] md:basis-[58%] lg:basis-1/2 xl:basis-1/3',
                     // staggered fade + slide-up when section enters
                     'transition-all duration-700 ease-out',
                     isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -287,7 +287,7 @@ const ProjectsSection: React.FC = () => {
                   style={{ transitionDelay: `${i * 120}ms` }}
                 >
                   <article className="group h-full">
-                    <div className="h-full rounded-[28px] border border-[var(--studio-border)] bg-[var(--studio-card-soft)] p-6 shadow-sm transition-colors duration-300 group-hover:border-[var(--studio-accent)]/40">
+                    <div className="h-full rounded-[28px] border border-[var(--studio-border)] bg-[var(--studio-card-soft)] p-5 sm:p-6 shadow-sm transition-colors duration-300 group-hover:border-[var(--studio-accent)]/40">
                       <div className="flex items-center justify-between gap-3 text-xs font-mono uppercase tracking-[0.2em] text-[var(--studio-muted)]">
                         <span className="truncate">{project.category}</span>
                         <div className="flex items-center gap-2">
@@ -307,7 +307,7 @@ const ProjectsSection: React.FC = () => {
                           src={project.image}
                           alt={project.title}
                           loading="lazy"
-                          className="h-72 w-auto max-w-[240px] object-contain p-4 transition-transform duration-500 group-hover:scale-[1.02]"
+                          className="h-64 sm:h-72 w-auto max-w-[220px] sm:max-w-[240px] object-contain p-4 transition-transform duration-500 group-hover:scale-[1.02]"
                         />
                       </div>
 
@@ -361,7 +361,7 @@ const ProjectsSection: React.FC = () => {
                           expandedProject === project.id ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
                         )}
                       >
-                        <div className="grid grid-cols-2 gap-2 pt-4">
+                        <div className="grid grid-cols-1 gap-2 pt-4 sm:grid-cols-2">
                           {project.highlights.map((h) => (
                             <div key={h} className="flex items-center gap-2 text-xs text-[var(--studio-muted)]">
                               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--studio-accent)" strokeWidth="2">
@@ -393,8 +393,9 @@ const ProjectsSection: React.FC = () => {
               ))}
             </CarouselContent>
 
-            <CarouselPrevious className="left-2 z-10 border-[var(--studio-border)] bg-[var(--studio-panel-soft)]/70 text-[var(--studio-muted)] hover:text-[var(--studio-accent)]" />
-            <CarouselNext className="right-2 z-10 border-[var(--studio-border)] bg-[var(--studio-panel-soft)]/70 text-[var(--studio-muted)] hover:text-[var(--studio-accent)]" />
+            {/* On mobile, users can swipe/drag; show arrows from md+ to reduce overlap. */}
+            <CarouselPrevious className="hidden md:inline-flex left-2 z-10 border-[var(--studio-border)] bg-[var(--studio-panel-soft)]/70 text-[var(--studio-muted)] hover:text-[var(--studio-accent)]" />
+            <CarouselNext className="hidden md:inline-flex right-2 z-10 border-[var(--studio-border)] bg-[var(--studio-panel-soft)]/70 text-[var(--studio-muted)] hover:text-[var(--studio-accent)]" />
           </Carousel>
         </div>
       </div>

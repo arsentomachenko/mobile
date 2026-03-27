@@ -86,11 +86,11 @@ const AboutSection: React.FC = () => {
               {/* Photo */}
               <div className="relative w-64 h-64 mx-auto mb-8">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#00FF87] to-[#00D9A3] animate-morph opacity-20 blur-xl" />
-                <img
+                {/* <img
                   src="https://d64gsuwffb70l.cloudfront.net/69b17eb58df55adb23cbd9ba_1773241367926_8a376b64.jpeg"
                   alt="Developer portrait"
                   className="relative w-full h-full object-cover object-center rounded-2xl border-2 border-[#00FF87]/20"
-                />
+                /> */}
                 {/* Floating badge */}
                 <div className="absolute -bottom-3 -right-3 px-4 py-2 bg-[#0a0a0a] border border-[#00FF87]/30 rounded-xl shadow-lg">
                   <span className="text-[#00FF87] font-semibold text-sm">11+ Years</span>
